@@ -1,4 +1,4 @@
-package com.example.GestioneCliente.Domain;
+package com.example.gestionecliente.Domain;
 
 public interface MessagePort {
     void sendOrder();

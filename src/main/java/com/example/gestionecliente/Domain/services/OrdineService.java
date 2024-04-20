@@ -1,7 +1,5 @@
 package com.example.GestioneCliente.Domain.services;
 
-import com.example.GestioneCliente.Domain.Entity.OrdineEntity;
-
 public interface OrdineService {
 
     /**

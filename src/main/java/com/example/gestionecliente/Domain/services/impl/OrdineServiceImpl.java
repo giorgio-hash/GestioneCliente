@@ -1,6 +1,5 @@
 package com.example.GestioneCliente.Domain.services.impl;
 
-import com.example.GestioneCliente.Domain.Entity.OrdineEntity;
 import com.example.GestioneCliente.Domain.services.OrdineService;
 import org.springframework.stereotype.Service;
 

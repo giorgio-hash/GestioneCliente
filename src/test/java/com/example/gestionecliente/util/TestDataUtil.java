@@ -1,8 +1,5 @@
 package com.example.GestioneCliente.util;
 
-import com.example.GestioneCliente.Domain.Entity.OrdineEntity;
-import com.example.GestioneCliente.Domain.dto.OrdineDTO;
-
 /**
  * Oggetti utili nei test
  */
