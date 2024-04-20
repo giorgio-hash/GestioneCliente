@@ -10,11 +10,11 @@ import java.io.Serializable;
 public class OrdineEntityPK implements Serializable {
 
     int id;
-    int idcomanda;
+    int idComanda;
 
-    public OrdineEntityPK(int id, int idcomanda) {
+    public OrdineEntityPK(int id, int idComanda) {
         this.id = id;
-        this.idcomanda = idcomanda;
+        this.idComanda = idComanda;
     }
 
 }
