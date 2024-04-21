@@ -31,6 +31,7 @@ CREATE TABLE `IngredientePrincipale` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+
 CREATE TABLE `Piatto` (
 `ID` varchar(20) NOT NULL,
 `ID_ingr_princ` varchar(20) NOT NULL,
@@ -56,4 +57,3 @@ CREATE TABLE `Ordine` (
   CONSTRAINT `Ordine_ibfk_2` FOREIGN KEY (`ID_piatto`) REFERENCES `Piatto` (`ID`),
   CONSTRAINT `CONSTRAINT_1` CHECK (`stato` >= 0 and `stato` <= 1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
