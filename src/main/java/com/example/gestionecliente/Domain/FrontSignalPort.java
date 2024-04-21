@@ -13,9 +13,9 @@ public interface FrontSignalPort {
     Optional<PiattoEntity> getPiatto(String idpiatto);
     OrdineEntity newOrder(String idcliente, String nomepiatto);
 
-    Optional<OrdineEntity> getOrder(int id, int idcomanda);
+    Optional<OrdineEntity> getOrder(int id);
 
-    int getOrderStatus(int id, int idcomanda);
+    int getOrderStatus(int id);
 
     //TODO
     //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);

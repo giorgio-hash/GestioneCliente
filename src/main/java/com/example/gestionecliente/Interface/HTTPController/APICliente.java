@@ -10,9 +10,9 @@ public interface APICliente {
 
     ResponseEntity submitOrder(String idcliente, String idpiatto);
 
-    ResponseEntity getOrder(int id, int idcomanda);
+    ResponseEntity getOrder(int id);
 
-    ResponseEntity getOrderStatus(int id, int idcomanda) throws JsonProcessingException;
+    ResponseEntity getOrderStatus(int id) throws JsonProcessingException;
 
     //TODO
     //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);
@@ -24,7 +24,5 @@ public interface APICliente {
 
     ResponseEntity getMenu();
 
-    @GetMapping(path = "/menu/{idpiatto}")
-    @ResponseBody
-    ResponseEntity getPiatto(@PathVariable String idpiatto);
+    ResponseEntity getPiatto(String idpiatto);
 }

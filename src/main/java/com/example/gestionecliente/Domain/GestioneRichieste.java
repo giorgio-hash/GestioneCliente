@@ -32,13 +32,13 @@ public class GestioneRichieste implements FrontSignalPort {
     }
 
     @Override
-    public Optional<OrdineEntity> getOrder(int id, int idcomanda) {
-        return gestioneOrdini.getOrder(id,idcomanda);
+    public Optional<OrdineEntity> getOrder(int id) {
+        return gestioneOrdini.getOrder(id);
     }
 
     @Override
-    public int getOrderStatus(int id, int idcomanda) {
-        return gestioneOrdini.getOrderStatus(id,idcomanda);
+    public int getOrderStatus(int id) {
+        return gestioneOrdini.getOrderStatus(id);
     }
 
     @Override

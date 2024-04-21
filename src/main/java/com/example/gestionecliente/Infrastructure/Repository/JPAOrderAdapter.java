@@ -4,7 +4,6 @@ import com.example.gestionecliente.Domain.DataOrderPort;
 import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
-import com.example.gestionecliente.Domain.Entity.OrdineEntityPK;
 import com.example.gestionecliente.Domain.Repository.ClienteRepository;
 import com.example.gestionecliente.Domain.Repository.ComandaRepository;
 import com.example.gestionecliente.Domain.Repository.OrdineRepository;
@@ -32,13 +31,13 @@ public class JPAOrderAdapter implements DataOrderPort {
     }
 
     @Override
-    public Optional<OrdineEntity> getOrder(int id, int idcomanda) {
-        return orrep.findById(new OrdineEntityPK(id,idcomanda));
+    public Optional<OrdineEntity> getOrder(int id) {
+        return orrep.findById(id);
     }
 
     @Override
-    public int getOrderStatus(int id, int idcomanda) {
-        Optional<OrdineEntity> res = orrep.findById(new OrdineEntityPK(id,idcomanda));
+    public int getOrderStatus(int id) {
+        Optional<OrdineEntity> res = orrep.findById(id);
         return res.isPresent()? res.get().getStato():-1;
     }
 

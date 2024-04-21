@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface DataOrderPort {
     OrdineEntity insertOrder(OrdineEntity o);
-    Optional<OrdineEntity> getOrder(int id, int idcomanda);
+    Optional<OrdineEntity> getOrder(int id);
 
-    int getOrderStatus(int id, int idcomanda);
+    int getOrderStatus(int id);
 
     ComandaEntity insertComanda(ComandaEntity c);
 

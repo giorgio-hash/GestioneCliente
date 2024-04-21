@@ -1,6 +1,5 @@
 package com.example.gestionecliente.Domain;
 
-import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,31 +29,32 @@ public class GestioneOrdini implements OrderManagerIF {
             ComandaEntity c = new ComandaEntity();
             c.setIdCliente(idcliente);
             c = dataOrderPort.insertComanda(c);
-            o.setIdComanda(c.getId());
+
+            o.setIdcomanda(c.getId());
             o.setIdPiatto(idpiatto);
             o = dataOrderPort.insertOrder(o);
             gestioneSessioni.newComanda(idcliente,c.getId());
-            gestioneSessioni.assignToComanda(o.getId(),o.getIdComanda());
+            gestioneSessioni.assignToComanda(o.getId(),o.getIdcomanda());
         }
         else
         {
-            o.setIdComanda(cached_idcomanda.get());
+            o.setIdcomanda(cached_idcomanda.get());
             o.setIdPiatto(idpiatto);
             o = dataOrderPort.insertOrder(o);
-            gestioneSessioni.assignToComanda(o.getId(),o.getIdComanda());
+            gestioneSessioni.assignToComanda(o.getId(),o.getIdcomanda());
         }
 
         return o;
     }
 
     @Override
-    public Optional<OrdineEntity> getOrder(int id, int idcomanda) {
-        return dataOrderPort.getOrder(id,idcomanda);
+    public Optional<OrdineEntity> getOrder(int id) {
+        return dataOrderPort.getOrder(id);
     }
 
     @Override
-    public int getOrderStatus(int id, int idcomanda) {
-        return dataOrderPort.getOrderStatus(id,idcomanda);
+    public int getOrderStatus(int id) {
+        return dataOrderPort.getOrderStatus(id);
     }
 
     @Override

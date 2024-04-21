@@ -43,9 +43,9 @@ public class RestAPICliente implements APICliente {
 
     @Override
     @GetMapping(path = "/order")
-    public ResponseEntity getOrder(@RequestParam int id, @RequestParam int idcomanda) {
+    public ResponseEntity getOrder(@RequestParam int id) {
 
-        Optional<OrdineEntity> res = frontSignalPort.getOrder(id,idcomanda);
+        Optional<OrdineEntity> res = frontSignalPort.getOrder(id);
 
         if(res.isEmpty()) return ResponseEntity.notFound().build();
 
@@ -54,15 +54,14 @@ public class RestAPICliente implements APICliente {
 
     @Override
     @GetMapping(path = "/order/status")
-    public ResponseEntity getOrderStatus(int id, int idcomanda) throws JsonProcessingException {
+    public ResponseEntity getOrderStatus(int id) throws JsonProcessingException {
 
-        int res = frontSignalPort.getOrderStatus(id,idcomanda);
+        int res = frontSignalPort.getOrderStatus(id);
 
         if(res == -1) return ResponseEntity.notFound().build();
 
 
         Map<String,String> data = new HashMap();
-        data.put("comanda", String.valueOf(idcomanda));
         data.put("ordine", String.valueOf(id));
         data.put("stato",String.valueOf(res));
 

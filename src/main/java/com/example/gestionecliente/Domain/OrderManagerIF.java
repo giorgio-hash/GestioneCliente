@@ -9,9 +9,9 @@ public interface OrderManagerIF {
 
     OrdineEntity addNewOrder(String idcliente, String idpiatto);
 
-    Optional<OrdineEntity> getOrder(int id, int idcomanda);
+    Optional<OrdineEntity> getOrder(int id);
 
-    int getOrderStatus(int id, int idcomanda);
+    int getOrderStatus(int id);
 
     //TODO
     //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);
