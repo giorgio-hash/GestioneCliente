@@ -1,8 +1,26 @@
-package com.example.GestioneCliente.Domain;
+package com.example.gestionecliente.Domain;
 
-import com.example.GestioneCliente.Domain.Entity.ClienteEntity;
+import com.example.gestionecliente.Domain.Entity.ComandaEntity;
+import com.example.gestionecliente.Domain.Entity.OrdineEntity;
+import com.example.gestionecliente.Domain.Entity.PiattoEntity;
+
+import java.util.Optional;
 
 public interface FrontSignalPort {
 
-    Iterable<ClienteEntity> getClienti();
+    Iterable<PiattoEntity> getMenu();
+
+    Optional<PiattoEntity> getPiatto(String idpiatto);
+    OrdineEntity newOrder(String idcliente, String nomepiatto);
+
+    Optional<OrdineEntity> getOrder(int id);
+
+    int getOrderStatus(int id);
+
+    //TODO
+    //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);
+
+    Optional<ComandaEntity> getComanda(String idcliente);
+
+
 }

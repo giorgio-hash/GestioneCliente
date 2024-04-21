@@ -1,33 +1,30 @@
-package com.example.GestioneCliente.Infrastructure.Repository;
+package com.example.gestionecliente.Infrastructure.Repository;
 
-import com.example.GestioneCliente.Domain.DataOrderPort;
-import com.example.GestioneCliente.Domain.Entity.ClienteEntity;
-import com.example.GestioneCliente.Domain.Repository.ClienteRepository;
+import com.example.gestionecliente.Domain.DataMenuPort;
+import com.example.gestionecliente.Domain.Entity.PiattoEntity;
+import com.example.gestionecliente.Domain.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public class JPAMenuAdapter implements DataOrderPort {
+public class JPAMenuAdapter implements DataMenuPort {
 
-    private final ClienteRepository clrep;
-
+    private final PiattoRepository pirep;
     @Autowired
-    public JPAMenuAdapter(ClienteRepository clrep) {
-        this.clrep = clrep;
+    public JPAMenuAdapter(PiattoRepository pirep) {
+        this.pirep = pirep;
+    }
+
+
+    @Override
+    public Iterable<PiattoEntity> getMenu() {
+        return pirep.findAll();
     }
 
     @Override
-    public void getOrderData() {
-
-    }
-
-    @Override
-    public void setOrderStatus() {
-
-    }
-
-    @Override
-    public Iterable<ClienteEntity> getClienti() {
-        return clrep.findAll();
+    public Optional<PiattoEntity> getPiatto(String idpiatto) {
+        return pirep.findById(idpiatto);
     }
 }

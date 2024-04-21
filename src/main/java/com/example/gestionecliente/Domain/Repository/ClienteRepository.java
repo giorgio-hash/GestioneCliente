@@ -1,7 +1,8 @@
-package com.example.GestioneCliente.Domain.Repository;
+package com.example.gestionecliente.Domain.Repository;
 
-import com.example.GestioneCliente.Domain.Entity.ClienteEntity;
+import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ClienteRepository extends CrudRepository<ClienteEntity, String> {
+public interface ClienteRepository extends CrudRepository<ClienteEntity, Integer> {
 }
+

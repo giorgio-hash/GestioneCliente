@@ -1,14 +1,17 @@
-package com.example.GestioneCliente.Domain.Entity;
+package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@jakarta.persistence.Table(name = "Cliente", schema = "serveeasy", catalog = "")
+@Table(name = "Cliente", schema = "serveeasy", catalog = "")
 public class ClienteEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @jakarta.persistence.Column(name = "ID", nullable = false, length = 10)
+    @Column(name = "ID", nullable = false, length = 10)
     private String id;
+    @Basic
+    @Column(name = "t_o_a", nullable = false)
+    private byte tOA;
 
     public String getId() {
         return id;
@@ -17,10 +20,6 @@ public class ClienteEntity {
     public void setId(String id) {
         this.id = id;
     }
-
-    @Basic
-    @Column(name = "t_o_a", nullable = false)
-    private byte tOA;
 
     public byte gettOA() {
         return tOA;

@@ -1,4 +1,4 @@
-package com.example.GestioneCliente.Infrastructure.MessageBroker;
+package com.example.gestionecliente.Infrastructure.MessageBroker;
 
 public class PubOrderEvent {
 }

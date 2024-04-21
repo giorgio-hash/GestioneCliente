@@ -1,4 +1,4 @@
-package com.example.GestioneCliente.config;
+package com.example.gestionecliente.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
