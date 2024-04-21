@@ -25,7 +25,7 @@ public class GestioneOrdini implements OrderManagerIF {
         OrdineEntity o = new OrdineEntity();
         Optional<Integer> cached_idcomanda = gestioneSessioni.getComanda(idcliente);
 
-        //per il momento è "forzato" ad andare sempre in else
+        //per il momento è "forzato" ad andare sempre in if
         if(cached_idcomanda.isEmpty()){
             ComandaEntity c = new ComandaEntity();
             c.setIdCliente(idcliente);
@@ -41,7 +41,6 @@ public class GestioneOrdini implements OrderManagerIF {
             o.setIdComanda(cached_idcomanda.get());
             o.setIdPiatto(idpiatto);
             o = dataOrderPort.insertOrder(o);
-            gestioneSessioni.newComanda(idcliente,cached_idcomanda.get());
             gestioneSessioni.assignToComanda(o.getId(),o.getIdComanda());
         }
 
@@ -51,6 +50,16 @@ public class GestioneOrdini implements OrderManagerIF {
     @Override
     public Optional<OrdineEntity> getOrder(int id, int idcomanda) {
         return dataOrderPort.getOrder(id,idcomanda);
+    }
+
+    @Override
+    public int getOrderStatus(int id, int idcomanda) {
+        return dataOrderPort.getOrderStatus(id,idcomanda);
+    }
+
+    @Override
+    public Optional<ComandaEntity> getComanda(String idcliente) {
+        return dataOrderPort.getComanda(idcliente);
     }
 
 }

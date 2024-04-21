@@ -1,5 +1,6 @@
 package com.example.gestionecliente.Domain;
 
+import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,11 @@ import java.util.Optional;
 @Service
 public class GestioneRichieste implements FrontSignalPort {
 
-    private final GestioneMenu gestioneMenu;
-    private final GestioneOrdini gestioneOrdini;
+    private final MenuManagerIF gestioneMenu;
+    private final OrderManagerIF gestioneOrdini;
 
     @Autowired
-    public GestioneRichieste(GestioneMenu gestioneMenu, GestioneOrdini gestioneOrdini) {
+    public GestioneRichieste(MenuManagerIF gestioneMenu, OrderManagerIF gestioneOrdini) {
         this.gestioneMenu = gestioneMenu;
         this.gestioneOrdini = gestioneOrdini;
     }
@@ -33,6 +34,21 @@ public class GestioneRichieste implements FrontSignalPort {
     @Override
     public Optional<OrdineEntity> getOrder(int id, int idcomanda) {
         return gestioneOrdini.getOrder(id,idcomanda);
+    }
+
+    @Override
+    public int getOrderStatus(int id, int idcomanda) {
+        return gestioneOrdini.getOrderStatus(id,idcomanda);
+    }
+
+    @Override
+    public Optional<ComandaEntity> getComanda(String idcliente) {
+        return gestioneOrdini.getComanda(idcliente);
+    }
+
+    @Override
+    public Optional<PiattoEntity> getPiatto(String idpiatto) {
+        return gestioneMenu.getPiatto(idpiatto);
     }
 
 }

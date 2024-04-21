@@ -1,7 +1,7 @@
-package com.example.GestioneCliente.config;
+package com.example.gestionecliente.config;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories(basePackages = "com.example.GestioneCliente.Domain.Repository")
+@EnableJpaRepositories(basePackages = "com.example.gestionecliente.Domain.Repository")
 public class JPAConfiguration {
 }

@@ -6,6 +6,8 @@ import com.example.gestionecliente.Domain.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class JPAMenuAdapter implements DataMenuPort {
 
@@ -19,5 +21,10 @@ public class JPAMenuAdapter implements DataMenuPort {
     @Override
     public Iterable<PiattoEntity> getMenu() {
         return pirep.findAll();
+    }
+
+    @Override
+    public Optional<PiattoEntity> getPiatto(String idpiatto) {
+        return pirep.findById(idpiatto);
     }
 }

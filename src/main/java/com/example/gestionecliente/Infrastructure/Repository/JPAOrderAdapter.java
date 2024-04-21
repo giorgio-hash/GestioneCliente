@@ -10,7 +10,6 @@ import com.example.gestionecliente.Domain.Repository.ComandaRepository;
 import com.example.gestionecliente.Domain.Repository.OrdineRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Repository
@@ -39,7 +38,8 @@ public class JPAOrderAdapter implements DataOrderPort {
 
     @Override
     public int getOrderStatus(int id, int idcomanda) {
-        return orrep.findById(new OrdineEntityPK(id,idcomanda)).get().getStato();
+        Optional<OrdineEntity> res = orrep.findById(new OrdineEntityPK(id,idcomanda));
+        return res.isPresent()? res.get().getStato():-1;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class JPAOrderAdapter implements DataOrderPort {
     }
 
     @Override
-    public Optional<ComandaEntity> getComanda(int id) {
-        return corep.findById(id);
+    public Optional<ComandaEntity> getComanda(String idcliente) {
+        return corep.findByCodicePagamentoIsNullAndIdClienteIs(idcliente);
     }
 
     @Override

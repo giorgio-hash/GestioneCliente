@@ -1,4 +1,4 @@
-package com.example.GestioneCliente.config;
+package com.example.gestionecliente.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;

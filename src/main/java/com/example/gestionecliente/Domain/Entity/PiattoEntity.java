@@ -1,13 +1,7 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.sql.Timestamp;
-
-@Setter
-@Getter
 @Entity
 @Table(name = "Piatto", schema = "serveeasy", catalog = "")
 public class PiattoEntity {
@@ -25,8 +19,48 @@ public class PiattoEntity {
     @Column(name = "prezzo", nullable = false, precision = 0)
     private double prezzo;
     @Basic
-    @Column(name = "t_preparazione", nullable = true)
-    private Timestamp tPreparazione;
+    @Column(name = "t_preparazione", nullable = false)
+    private int tPreparazione;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIdIngrPrinc() {
+        return idIngrPrinc;
+    }
+
+    public void setIdIngrPrinc(String idIngrPrinc) {
+        this.idIngrPrinc = idIngrPrinc;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public int gettPreparazione() {
+        return tPreparazione;
+    }
+
+    public void settPreparazione(int tPreparazione) {
+        this.tPreparazione = tPreparazione;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -35,7 +69,13 @@ public class PiattoEntity {
 
         PiattoEntity that = (PiattoEntity) o;
 
-        return this.id.equals(that.id);
+        if (Double.compare(prezzo, that.prezzo) != 0) return false;
+        if (tPreparazione != that.tPreparazione) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (idIngrPrinc != null ? !idIngrPrinc.equals(that.idIngrPrinc) : that.idIngrPrinc != null) return false;
+        if (descrizione != null ? !descrizione.equals(that.descrizione) : that.descrizione != null) return false;
+
+        return true;
     }
 
     @Override
@@ -47,7 +87,7 @@ public class PiattoEntity {
         result = 31 * result + (descrizione != null ? descrizione.hashCode() : 0);
         temp = Double.doubleToLongBits(prezzo);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (tPreparazione != null ? tPreparazione.hashCode() : 0);
+        result = 31 * result + tPreparazione;
         return result;
     }
 }

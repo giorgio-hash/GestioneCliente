@@ -11,26 +11,26 @@ import java.util.Optional;
 public class GestioneMenu implements MenuManagerIF {
 
     private final DataMenuPort dataMenuPort;
-    private Iterable<PiattoEntity> piatti;
+    //private Iterable<PiattoEntity> piatti;
 
     @Autowired
     public GestioneMenu(DataMenuPort dataMenuPort) {
         this.dataMenuPort = dataMenuPort;
-        piatti = dataMenuPort.getMenu();
+        //piatti = dataMenuPort.getMenu();
     }
 
 
     @Override
     public Optional<PiattoEntity> getPiatto(String idpiatto) {
-        for(PiattoEntity o : piatti)
-            if(o.getId().equals(idpiatto))
-                return Optional.of(o);
+        //for(PiattoEntity o : piatti)
+        //    if(o.getId().equals(idpiatto))
+        //        return Optional.of(o);
 
-        return Optional.empty();
+        return dataMenuPort.getPiatto(idpiatto);
     }
 
     @Override
     public Iterable<PiattoEntity> getMenu() {
-        return piatti;
+        return dataMenuPort.getMenu();
     }
 }

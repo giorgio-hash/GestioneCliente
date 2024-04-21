@@ -14,7 +14,7 @@ public interface DataOrderPort {
 
     ComandaEntity insertComanda(ComandaEntity c);
 
-    Optional<ComandaEntity> getComanda(int id);
+    Optional<ComandaEntity> getComanda(String idcliente);
 
     void insertTakeoutPhoneNum(ClienteEntity c);
     Iterable<ClienteEntity> getClienti();
