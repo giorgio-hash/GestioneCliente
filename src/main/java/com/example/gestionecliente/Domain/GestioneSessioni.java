@@ -8,8 +8,8 @@ public class GestioneSessioni implements SessioneIF{
     private HashMap<Integer,Integer> comande_ordini;
 
     public GestioneSessioni() {
-        this.clienti_comande = new HashMap<>();
-        this.comande_ordini = new HashMap<>();
+        this.clienti_comande = new HashMap<String, Integer>();
+        this.comande_ordini = new HashMap<Integer,Integer>();
     }
 
 

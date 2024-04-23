@@ -22,7 +22,7 @@ import java.util.Optional;
 public class RestAPICliente implements APICliente {
 
     private final FrontSignalPort frontSignalPort;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper; //utile per convertire strutture semplici in dizionari
 
 
     @Autowired

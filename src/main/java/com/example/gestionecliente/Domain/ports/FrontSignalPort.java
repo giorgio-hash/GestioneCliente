@@ -29,26 +29,41 @@ public interface FrontSignalPort {
 
     /**
      * Richiesta per ottenere l'assegnazione di una nuova comanda al cliente.
-     * Richiede che la comanda precedente venga chiusa.
+     * Richiede che la comanda precedente venga chiusa prima di crearne una nuova.
      *
-     * @param idcliente
+     * @param idcliente identificativo cliente di tipo <i>String<i/>
      * @return oggetto entità di tipo <i>ComandaEntity<i/>
      */
     Optional<ComandaEntity> newComanda(String idcliente);
 
+    /**
+     * Richiesta per ottenenere la comanda attualmente attiva per uno specifico cliente.
+     * @param idcliente identificativo di tipo <i>String<i/>
+     * @return container <i>Optional<i/> contenente un oggetto <i>ComandaEntity<i/> oppure <i>null<i/>
+     */
     Optional<ComandaEntity> getComandaAttiva(String idcliente);
 
     /**
-     * Richiesta per ottenere l'inserimento di un nuovo ordine
-     * @param idcomanda
-     * @param nomepiatto
-     * @return
+     * Richiesta per ottenere l'inserimento di un nuovo ordine per la specifica comanda.
+     * @param idcomanda identificativo comanda, tipo intero
+     * @param nomepiatto identificativo piatto, tipo {@code String}
+     * @return oggetto inserito, di tipo {@code OrdineEntity}
      * @throws JsonProcessingException
      */
     OrdineEntity newOrder(int idcomanda, String nomepiatto) throws JsonProcessingException;
 
+    /**
+     * Richiesta per ottenere un ordine specifico.
+     * @param id identificativo ordine di tipo intero
+     * @return container <i>Optional<i/> contenente un oggetto <i>OrdineEntity<i/> oppure <i>null<i/>
+     */
     Optional<OrdineEntity> getOrder(int id);
 
+    /**
+     * Richiesta per ottenere lo stato di un ordine specifico.
+     * @param id identificativo ordine di tipo intero
+     * @return un intero compreso tra 0(in attesa), 1=(in preparazione), 2(pronto) oppure -1 in caso di errore o id non valido
+     */
     int getOrderStatus(int id);
 
     //TODO

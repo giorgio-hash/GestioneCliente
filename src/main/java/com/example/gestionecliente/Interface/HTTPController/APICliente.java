@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Interfaccia per comunicazioni HTTP al server REST
+ * Interfaccia per comunicazioni HTTP al server REST GestioneCliente
  */
 public interface APICliente {
 

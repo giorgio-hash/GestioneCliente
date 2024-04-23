@@ -16,7 +16,7 @@ public interface DataMenuPort {
 
     /**
      * Restituisce uno specifico piatto del menu.
-     * @param idpiatto identificativo del piatto
+     * @param idpiatto identificativo del piatto di tipo <i>String<i/>
      * @return container <i>Optional<i/> che può contenere un <i>PiattoEntity<i/> oppure <i>null<i/>
      */
     Optional<PiattoEntity> getPiatto(String idpiatto);

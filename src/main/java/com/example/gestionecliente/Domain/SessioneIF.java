@@ -3,7 +3,7 @@ package com.example.gestionecliente.Domain;
 import java.util.Optional;
 
 /**
- * interfaccia per velocizzare la gestione delle sessioni attive dei clienti
+ * Interfaccia per velocizzare la gestione delle sessioni attive dei clienti
  */
 public interface SessioneIF {
 

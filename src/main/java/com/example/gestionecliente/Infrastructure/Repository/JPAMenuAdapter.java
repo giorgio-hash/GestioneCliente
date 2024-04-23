@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Bean per usare il framework JPA su datasource MariaDB.
+ * Costituisce l'adattatore per la porta DataMenuPort
+ */
 @Repository
 public class JPAMenuAdapter implements DataMenuPort {
 
