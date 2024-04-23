@@ -2,6 +2,7 @@ package com.example.gestionecliente.Domain;
 
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
+import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,40 +12,37 @@ import java.util.Optional;
 public class GestioneOrdini implements OrderManagerIF {
 
     private final DataOrderPort dataOrderPort;
-    private final SessioneIF gestioneSessioni = new GestioneSessioni();
+    private final SessioneIF gestioneSessioni;
 
     @Autowired
     public GestioneOrdini(DataOrderPort dataOrderPort) {
         this.dataOrderPort = dataOrderPort;
+        gestioneSessioni = new GestioneSessioni();
+    }
+
+
+    @Override
+    public ComandaEntity newComanda(String idcliente) {
+        ComandaEntity c = new ComandaEntity();
+        c.setIdCliente(idcliente);
+        return dataOrderPort.insertComanda(c);
     }
 
     @Override
-    public OrdineEntity addNewOrder(String idcliente, String idpiatto) {
+    public Optional<ComandaEntity> getComandaAttiva(String idcliente) {
+        return dataOrderPort.getComandaAttiva(idcliente);
+    }
+
+    @Override
+    public OrdineEntity addNewOrder(int idcomanda, String idpiatto) {
 
         OrdineEntity o = new OrdineEntity();
-        Optional<Integer> cached_idcomanda = gestioneSessioni.getComanda(idcliente);
+        o.setIdcomanda(idcomanda);
+        o.setIdPiatto(idpiatto);
 
-        //per il momento è "forzato" ad andare sempre in if
-        if(cached_idcomanda.isEmpty()){
-            ComandaEntity c = new ComandaEntity();
-            c.setIdCliente(idcliente);
-            c = dataOrderPort.insertComanda(c);
 
-            o.setIdcomanda(c.getId());
-            o.setIdPiatto(idpiatto);
-            o = dataOrderPort.insertOrder(o);
-            gestioneSessioni.newComanda(idcliente,c.getId());
-            gestioneSessioni.assignToComanda(o.getId(),o.getIdcomanda());
-        }
-        else
-        {
-            o.setIdcomanda(cached_idcomanda.get());
-            o.setIdPiatto(idpiatto);
-            o = dataOrderPort.insertOrder(o);
-            gestioneSessioni.assignToComanda(o.getId(),o.getIdcomanda());
-        }
+        return dataOrderPort.insertOrder(o);
 
-        return o;
     }
 
     @Override
@@ -55,11 +53,6 @@ public class GestioneOrdini implements OrderManagerIF {
     @Override
     public int getOrderStatus(int id) {
         return dataOrderPort.getOrderStatus(id);
-    }
-
-    @Override
-    public Optional<ComandaEntity> getComanda(String idcliente) {
-        return dataOrderPort.getComanda(idcliente);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.gestionecliente.Infrastructure.Repository;
 
-import com.example.gestionecliente.Domain.DataMenuPort;
+import com.example.gestionecliente.Domain.ports.DataMenuPort;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
 import com.example.gestionecliente.Domain.Repository.PiattoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Bean per usare il framework JPA su datasource MariaDB.
+ * Costituisce l'adattatore per la porta DataMenuPort
+ */
 @Repository
 public class JPAMenuAdapter implements DataMenuPort {
 

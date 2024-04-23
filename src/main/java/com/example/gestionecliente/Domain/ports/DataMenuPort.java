@@ -1,13 +1,18 @@
-package com.example.gestionecliente.Domain;
+package com.example.gestionecliente.Domain.ports;
 
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
 
 import java.util.Optional;
 
 /**
- * Interfaccia per la gestione delle operazioni su Piatto, IngredientePrincipale
+ * Porta per gli adattatori verso la base dati Piatto e IngredientePrincipale
  */
-public interface MenuManagerIF {
+public interface DataMenuPort {
+    /**
+     * Restituisce tutti i piatti del menu.
+     * @return collezione <i>Iterable<i/> di <i>PiattoEntity<i/>
+     */
+    Iterable<PiattoEntity> getMenu();
 
     /**
      * Restituisce uno specifico piatto del menu.
@@ -15,9 +20,4 @@ public interface MenuManagerIF {
      * @return container <i>Optional<i/> che può contenere un <i>PiattoEntity<i/> oppure <i>null<i/>
      */
     Optional<PiattoEntity> getPiatto(String idpiatto);
-    /**
-     * Restituisce tutti i piatti del menu.
-     * @return collezione <i>Iterable<i/> di <i>PiattoEntity<i/>
-     */
-    Iterable<PiattoEntity> getMenu();
 }

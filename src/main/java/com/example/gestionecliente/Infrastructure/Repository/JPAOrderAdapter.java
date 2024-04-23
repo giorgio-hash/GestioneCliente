@@ -1,16 +1,21 @@
 package com.example.gestionecliente.Infrastructure.Repository;
 
-import com.example.gestionecliente.Domain.DataOrderPort;
+import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Repository.ClienteRepository;
 import com.example.gestionecliente.Domain.Repository.ComandaRepository;
 import com.example.gestionecliente.Domain.Repository.OrdineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Bean per usare il framework JPA su datasource MariaDB.
+ * Costituisce l'adattatore per la porta DataOrderPort
+ */
 @Repository
 public class JPAOrderAdapter implements DataOrderPort {
 
@@ -18,6 +23,13 @@ public class JPAOrderAdapter implements DataOrderPort {
     private final ComandaRepository corep;
     private final OrdineRepository orrep;
 
+    /**
+     * Costruttore JPAOrderAdapter
+     * @param clrep bean interfaccia {@code CrudRepository<ClienteEntity, String>}
+     * @param corep bean interfaccia {@code CrudRepository<ComandaEntity, Integer>}
+     * @param orrep bean interfaccia {@code CrudRepository<OrdineEntity, Integer>}
+     */
+    @Autowired
     public JPAOrderAdapter(ClienteRepository clrep, ComandaRepository corep, OrdineRepository orrep) {
         this.clrep = clrep;
         this.corep = corep;
@@ -47,7 +59,7 @@ public class JPAOrderAdapter implements DataOrderPort {
     }
 
     @Override
-    public Optional<ComandaEntity> getComanda(String idcliente) {
+    public Optional<ComandaEntity> getComandaAttiva(String idcliente) {
         return corep.findByCodicePagamentoIsNullAndIdClienteIs(idcliente);
     }
 

@@ -1,6 +1,7 @@
 package com.example.gestionecliente.Infrastructure.MessageBroker;
 
 import com.example.gestionecliente.Domain.dto.NotificaOrdineDTO;
+import com.example.gestionecliente.Domain.ports.MessagePort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.java.Log;
@@ -12,15 +13,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Adattatore publisher nella meccanica pub-sub del framework Kafka: pubblica messaggi sul topic notifyOrderEvent.
+ */
 @Service
 @Log
-public class PubOrderProducer {
+public class PubOrderProducer implements MessagePort<NotificaOrdineDTO> {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     private final ObjectMapper objectMapper;
 
     /**
-     * topic sul quale è in ascolto la cucina
+     * topic sul quale è in ascolto GestioneComanda
      */
     @Value("${spring.kafka.producer.topic}")
     private String topic;
