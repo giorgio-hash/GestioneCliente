@@ -19,8 +19,18 @@ public class GestioneSessioni implements SessioneIF{
     }
 
     @Override
-    public void newComanda(String cliente, int idcomanda) {
+    public Optional<Integer> getComanda(int idordine) {
+        return Optional.empty();
+    }
 
+    @Override
+    public void newComanda(String idcliente, int idcomanda) {
+
+    }
+
+    @Override
+    public Iterable<Integer> getOrdinersFromComanda(int idcomanda) {
+        return null;
     }
 
     @Override
@@ -30,6 +40,16 @@ public class GestioneSessioni implements SessioneIF{
 
     @Override
     public void deleteComanda(int idcomanda) {
+
+    }
+
+    @Override
+    public void addCliente(String idcliente) {
+
+    }
+
+    @Override
+    public void deleteCliente(String idcliente) {
 
     }
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface ComandaRepository extends CrudRepository<ComandaEntity, Integer> {
 
     Optional<ComandaEntity> findByCodicePagamentoIsNullAndIdClienteIs(String idcliente);
-    Optional<ComandaEntity> findByIdClienteIs(String idcliente);
+
 }

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfer Object che notifica un aggiornamento della base dati Ordine
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

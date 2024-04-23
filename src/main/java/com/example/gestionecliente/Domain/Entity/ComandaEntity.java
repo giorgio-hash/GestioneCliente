@@ -1,7 +1,18 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * Oggetto Entity per la base dati Comanda
+ */
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Comanda", schema = "serveeasy", catalog = "")
 public class ComandaEntity {
@@ -18,38 +29,6 @@ public class ComandaEntity {
     @Basic
     @Column(name = "totale_scontrino", nullable = true, precision = 0)
     private Double totaleScontrino;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public String getCodicePagamento() {
-        return codicePagamento;
-    }
-
-    public void setCodicePagamento(String codicePagamento) {
-        this.codicePagamento = codicePagamento;
-    }
-
-    public Double getTotaleScontrino() {
-        return totaleScontrino;
-    }
-
-    public void setTotaleScontrino(Double totaleScontrino) {
-        this.totaleScontrino = totaleScontrino;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -2,27 +2,34 @@ package com.example.gestionecliente.Interface.HTTPController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * Interfaccia per comunicazioni HTTP al server REST
+ */
 public interface APICliente {
 
-    ResponseEntity submitOrder(String idcliente, String idpiatto);
+    @PostMapping(path = "/order/add")
+    ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto) throws JsonProcessingException;
 
-    ResponseEntity getOrder(int id);
+    @GetMapping(path = "/order")
+    ResponseEntity getOrder(@RequestParam int id);
 
-    ResponseEntity getOrderStatus(int id) throws JsonProcessingException;
+    @GetMapping(path = "/order/status")
+    ResponseEntity getOrderStatus(@RequestParam int id) throws JsonProcessingException;
 
     //TODO
-    //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);
+    //Iterable<OrdineEntity> getOrdersOfCliente(String cliente);
 
-    //TODO
-    //Iterable<OrdineEntity> getActualOrdersOfCliente(String idcliente);
+    @GetMapping(path = "{idcliente}/comanda/attiva")
+    ResponseEntity getComandaAttiva(@PathVariable String idcliente);
 
-    ResponseEntity getComanda(String idcliente);
+    @GetMapping(path = "{idcliente}/comanda/new")
+    ResponseEntity newComanda(@PathVariable String idcliente);
 
+    @GetMapping(path = "/menu")
     ResponseEntity getMenu();
 
-    ResponseEntity getPiatto(String idpiatto);
+    @GetMapping(path = "/menu/{idpiatto}")
+    ResponseEntity getPiatto(@PathVariable String idpiatto);
 }

@@ -1,14 +1,21 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * Oggetto Entity per la base dati Ordine
+ */
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Ordine", schema = "serveeasy", catalog = "")
 public class OrdineEntity {

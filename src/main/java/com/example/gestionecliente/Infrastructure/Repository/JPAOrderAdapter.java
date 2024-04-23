@@ -1,6 +1,6 @@
 package com.example.gestionecliente.Infrastructure.Repository;
 
-import com.example.gestionecliente.Domain.DataOrderPort;
+import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
@@ -47,7 +47,7 @@ public class JPAOrderAdapter implements DataOrderPort {
     }
 
     @Override
-    public Optional<ComandaEntity> getComanda(String idcliente) {
+    public Optional<ComandaEntity> getComandaAttiva(String idcliente) {
         return corep.findByCodicePagamentoIsNullAndIdClienteIs(idcliente);
     }
 

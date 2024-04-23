@@ -1,4 +1,4 @@
-package com.example.gestionecliente.Domain;
+package com.example.gestionecliente.Domain.ports;
 
 import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
@@ -14,7 +14,7 @@ public interface DataOrderPort {
 
     ComandaEntity insertComanda(ComandaEntity c);
 
-    Optional<ComandaEntity> getComanda(String idcliente);
+    Optional<ComandaEntity> getComandaAttiva(String idcliente);
 
     void insertTakeoutPhoneNum(ClienteEntity c);
     Iterable<ClienteEntity> getClienti();
