@@ -1,14 +1,12 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Oggetto Entity per la base dati Cliente
  */
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

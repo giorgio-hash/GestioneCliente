@@ -37,7 +37,7 @@ public class GestioneOrdini implements OrderManagerIF {
     public OrdineEntity addNewOrder(int idcomanda, String idpiatto) {
 
         OrdineEntity o = new OrdineEntity();
-        o.setIdcomanda(idcomanda);
+        o.setIdComanda(idcomanda);
         o.setIdPiatto(idpiatto);
 
 
