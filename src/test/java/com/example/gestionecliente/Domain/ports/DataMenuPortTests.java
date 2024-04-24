@@ -1,5 +1,6 @@
 package com.example.gestionecliente.Domain.ports;
 
+import com.example.gestionecliente.Domain.Entity.IngredientePrincipaleEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
 import com.example.gestionecliente.Domain.Repository.IngredientePrincipaleRepository;
 import com.example.gestionecliente.Domain.Repository.PiattoRepository;
@@ -24,17 +25,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class DataMenuPortTests {
 
-    @Autowired
+
     private DataMenuPort dataMenuPort;
-    @Autowired
     private PiattoRepository pR;
-    @Autowired
     private IngredientePrincipaleRepository iPR;
 
-
+    @Autowired
+    public DataMenuPortTests(DataMenuPort dataMenuPort, PiattoRepository pR, IngredientePrincipaleRepository iPR) {
+        this.dataMenuPort = dataMenuPort;
+        this.pR = pR;
+        this.iPR = iPR;
+    }
 
     @Test
     public void testFindPiattoByID() {
+
+        IngredientePrincipaleEntity ip = iPR.save(TestDataUtil.createCarota());
+        PiattoEntity p = pR.save(TestDataUtil.createPiattoEntityA());
 
         PiattoEntity expected = TestDataUtil.createPiattoEntityA();
         Optional<PiattoEntity> obtained = dataMenuPort.getPiatto("ZUDICA");
@@ -51,8 +58,11 @@ public class DataMenuPortTests {
     @Test
     public void testFindAllPiatto(){
 
+
         PiattoEntity existingA = TestDataUtil.createPiattoEntityA();
         PiattoEntity existingB = TestDataUtil.createPiattoEntityB();
+        pR.save(existingA);
+        pR.save(existingB);
 
         Iterable<PiattoEntity> obtained = dataMenuPort.getMenu();
 

@@ -8,6 +8,12 @@ import com.example.gestionecliente.Domain.dto.NotificaOrdineDTO;
 
 public class TestDataUtil {
 
+    public static IngredientePrincipaleEntity createCarota(){
+        return IngredientePrincipaleEntity.builder()
+                .id("CAARA")
+                .nome("carota arancione")
+                .build();
+    }
     public static PiattoEntity createPiattoEntityA(){
         return PiattoEntity.builder()
                 .id("ZUDICA")

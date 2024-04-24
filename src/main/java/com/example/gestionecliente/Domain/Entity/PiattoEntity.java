@@ -15,7 +15,7 @@ import lombok.*;
 @Entity
 @Table(name = "Piatto", schema = "serveeasy", catalog = "")
 public class PiattoEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "ID", nullable = false, length = 20)
     private String id;
