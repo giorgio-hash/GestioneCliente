@@ -40,8 +40,8 @@ public class DataMenuPortTests {
     @Test
     public void testFindPiattoByID() {
 
-        IngredientePrincipaleEntity ip = iPR.save(TestDataUtil.createCarota());
-        PiattoEntity p = pR.save(TestDataUtil.createPiattoEntityA());
+        iPR.save(TestDataUtil.createCarota());
+        pR.save(TestDataUtil.createPiattoEntityA());
 
         PiattoEntity expected = TestDataUtil.createPiattoEntityA();
         Optional<PiattoEntity> obtained = dataMenuPort.getPiatto("ZUDICA");
@@ -58,6 +58,7 @@ public class DataMenuPortTests {
     @Test
     public void testFindAllPiatto(){
 
+        iPR.save(TestDataUtil.createCarota());
 
         PiattoEntity existingA = TestDataUtil.createPiattoEntityA();
         PiattoEntity existingB = TestDataUtil.createPiattoEntityB();

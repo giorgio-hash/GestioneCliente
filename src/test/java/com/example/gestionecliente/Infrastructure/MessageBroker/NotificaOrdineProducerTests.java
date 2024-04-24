@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * utilizzando un consumer creato con embedded kafka
  */
 @EnableKafka
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration
 @SpringBootTest(classes = {EmbeddedKafkaConfig.class, PubOrderProducer.class})
 @DirtiesContext
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
