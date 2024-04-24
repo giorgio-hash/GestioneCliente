@@ -6,6 +6,7 @@ import lombok.*;
 /**
  * Oggetto Entity per la base dati Comanda
  */
+@Data
 @Builder
 @Setter
 @Getter
@@ -28,29 +29,4 @@ public class ComandaEntity {
     @Column(name = "totale_scontrino", nullable = true, precision = 0)
     private Double totaleScontrino;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ComandaEntity that = (ComandaEntity) o;
-
-        if (id != that.id) return false;
-        if (idCliente != null ? !idCliente.equals(that.idCliente) : that.idCliente != null) return false;
-        if (codicePagamento != null ? !codicePagamento.equals(that.codicePagamento) : that.codicePagamento != null)
-            return false;
-        if (totaleScontrino != null ? !totaleScontrino.equals(that.totaleScontrino) : that.totaleScontrino != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (idCliente != null ? idCliente.hashCode() : 0);
-        result = 31 * result + (codicePagamento != null ? codicePagamento.hashCode() : 0);
-        result = 31 * result + (totaleScontrino != null ? totaleScontrino.hashCode() : 0);
-        return result;
-    }
 }
