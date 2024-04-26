@@ -1,7 +1,18 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * Oggetto Entity per la base dati Cliente
+ */
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "Cliente", schema = "serveeasy", catalog = "")
 public class ClienteEntity {
@@ -12,22 +23,6 @@ public class ClienteEntity {
     @Basic
     @Column(name = "t_o_a", nullable = false)
     private byte tOA;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public byte gettOA() {
-        return tOA;
-    }
-
-    public void settOA(byte tOA) {
-        this.tOA = tOA;
-    }
 
     @Override
     public boolean equals(Object o) {

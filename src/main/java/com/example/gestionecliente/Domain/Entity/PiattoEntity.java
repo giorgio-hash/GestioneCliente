@@ -1,7 +1,18 @@
 package com.example.gestionecliente.Domain.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * Oggetto Entity per la base dati Piatto
+ */
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Piatto", schema = "serveeasy", catalog = "")
 public class PiattoEntity {
@@ -21,46 +32,6 @@ public class PiattoEntity {
     @Basic
     @Column(name = "t_preparazione", nullable = false)
     private int tPreparazione;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdIngrPrinc() {
-        return idIngrPrinc;
-    }
-
-    public void setIdIngrPrinc(String idIngrPrinc) {
-        this.idIngrPrinc = idIngrPrinc;
-    }
-
-    public String getDescrizione() {
-        return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public double getPrezzo() {
-        return prezzo;
-    }
-
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
-    }
-
-    public int gettPreparazione() {
-        return tPreparazione;
-    }
-
-    public void settPreparazione(int tPreparazione) {
-        this.tPreparazione = tPreparazione;
-    }
 
     @Override
     public boolean equals(Object o) {
