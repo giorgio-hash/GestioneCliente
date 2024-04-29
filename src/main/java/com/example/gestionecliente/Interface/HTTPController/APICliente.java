@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Interfaccia per comunicazioni HTTP al server REST GestioneCliente
  */
+
+@RequestMapping(path = "/cliente")
 public interface APICliente {
 
     @PostMapping(path = "/order/add")
@@ -18,8 +20,8 @@ public interface APICliente {
     @GetMapping(path = "/order/status")
     ResponseEntity getOrderStatus(@RequestParam int id) throws JsonProcessingException;
 
-    //TODO
-    //Iterable<OrdineEntity> getOrdersOfCliente(String cliente);
+    @GetMapping(path = "{idcliente}/orders")
+    ResponseEntity getOrdersOfCliente(@PathVariable String idcliente);
 
     @GetMapping(path = "{idcliente}/comanda/attiva")
     ResponseEntity getComandaAttiva(@PathVariable String idcliente);

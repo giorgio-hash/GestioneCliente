@@ -22,6 +22,12 @@ public class GestioneOrdini implements OrderManagerIF {
 
 
     @Override
+    public Optional<Iterable<OrdineEntity>> getOrdersOfCliente(String idcliente) {
+        Optional<ComandaEntity> comanda = dataOrderPort.getComandaAttiva(idcliente);
+        return Optional.ofNullable(comanda.isEmpty()? null : dataOrderPort.getOrdersOfComanda(comanda.get().getId()));
+    }
+
+    @Override
     public ComandaEntity newComanda(String idcliente) {
         ComandaEntity c = new ComandaEntity();
         c.setIdCliente(idcliente);

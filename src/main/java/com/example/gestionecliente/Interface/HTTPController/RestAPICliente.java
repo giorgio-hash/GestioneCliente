@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path = "/cliente")
 public class RestAPICliente implements APICliente {
 
     private final FrontSignalPort frontSignalPort;
@@ -32,7 +31,6 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @PostMapping(path = "/order/add")
     public ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto) throws JsonProcessingException {
 
         Optional<ComandaEntity> cres = frontSignalPort.getComandaAttiva(idcliente);
@@ -48,7 +46,6 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "/order")
     public ResponseEntity getOrder(@RequestParam int id) {
 
         Optional<OrdineEntity> res = frontSignalPort.getOrder(id);
@@ -59,7 +56,6 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "/order/status")
     public ResponseEntity getOrderStatus(@RequestParam int id) throws JsonProcessingException {
 
         int res = frontSignalPort.getOrderStatus(id);
@@ -77,7 +73,16 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "{idcliente}/comanda")
+    public ResponseEntity getOrdersOfCliente(String idcliente) {
+
+        Optional<Iterable<OrdineEntity>> res = frontSignalPort.getOrdersOfCliente(idcliente);
+        if(res.isEmpty())
+            return new ResponseEntity<String>("comanda cliente non trovata",HttpStatus.NOT_FOUND);
+
+        return ResponseEntity.ok(res.get());
+    }
+
+    @Override
     public ResponseEntity getComandaAttiva(@PathVariable String idcliente) {
 
         Optional<ComandaEntity> res = frontSignalPort.getComandaAttiva(idcliente);
@@ -88,7 +93,6 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "{idcliente}/comanda/new")
     public ResponseEntity newComanda(@PathVariable String idcliente) {
         Optional<ComandaEntity> res = frontSignalPort.newComanda(idcliente);
 
@@ -97,7 +101,6 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "/menu")
     public ResponseEntity getMenu() {
 
         Iterable<PiattoEntity> res = frontSignalPort.getMenu();
@@ -108,8 +111,7 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    @GetMapping(path = "/menu/{idpiatto}")
-    public ResponseEntity getPiatto(@PathVariable String idpiatto) {
+    public ResponseEntity getPiatto(String idpiatto) {
 
         Optional<PiattoEntity> res = frontSignalPort.getPiatto(idpiatto);
 
