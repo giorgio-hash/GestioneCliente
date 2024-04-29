@@ -1,12 +1,10 @@
 package com.example.gestionecliente.Infrastructure.Repository;
 
-import com.example.gestionecliente.Domain.ports.DataOrderPort;
-import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
-import com.example.gestionecliente.Domain.Repository.ClienteRepository;
 import com.example.gestionecliente.Domain.Repository.ComandaRepository;
 import com.example.gestionecliente.Domain.Repository.OrdineRepository;
+import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,19 +17,18 @@ import java.util.Optional;
 @Repository
 public class JPAOrderAdapter implements DataOrderPort {
 
-    private final ClienteRepository clrep;
+    //private final ClienteRepository clrep;
     private final ComandaRepository corep;
     private final OrdineRepository orrep;
 
     /**
      * Costruttore JPAOrderAdapter
-     * @param clrep bean interfaccia {@code CrudRepository<ClienteEntity, String>}
+     *
      * @param corep bean interfaccia {@code CrudRepository<ComandaEntity, Integer>}
      * @param orrep bean interfaccia {@code CrudRepository<OrdineEntity, Integer>}
      */
     @Autowired
-    public JPAOrderAdapter(ClienteRepository clrep, ComandaRepository corep, OrdineRepository orrep) {
-        this.clrep = clrep;
+    public JPAOrderAdapter(ComandaRepository corep, OrdineRepository orrep) {
         this.corep = corep;
         this.orrep = orrep;
     }
@@ -64,17 +61,8 @@ public class JPAOrderAdapter implements DataOrderPort {
     }
 
     @Override
-    public void insertTakeoutPhoneNum(ClienteEntity c) {
-        clrep.save(c);
+    public Iterable<OrdineEntity> getOrdersOfComanda(int idcomanda) {
+        return orrep.getAllOrdersOfComanda(idcomanda);
     }
 
-    @Override
-    public Iterable<ClienteEntity> getClienti() {
-        return clrep.findAll();
-    }
-
-    @Override
-    public void deleteTakeoutPhoneNum(ClienteEntity c) {
-            clrep.delete(c);
-    }
 }

@@ -66,8 +66,12 @@ public interface FrontSignalPort {
      */
     int getOrderStatus(int id);
 
-    //TODO
-    //Iterable<OrdineEntity> getOrdersFromComanda(int idcomanda);
+    /**
+     * Restituisce gli ordini di un certo cliente
+     * @param idcliente identificativo di entità {@code OrdineEntity}
+     * @return una container {@code Optional} contenente {@code null} oppure una collezione {@code Iterable} di oggetti {@code OrdineEntity}
+     */
+    Optional<Iterable<OrdineEntity>> getOrdersOfCliente(String idcliente);
 
 
 }

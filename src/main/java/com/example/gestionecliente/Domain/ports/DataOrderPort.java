@@ -1,6 +1,5 @@
 package com.example.gestionecliente.Domain.ports;
 
-import com.example.gestionecliente.Domain.Entity.ClienteEntity;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 
@@ -40,15 +39,15 @@ public interface DataOrderPort {
 
     /**
      * Ritorna la comanda attualmente aperta per lo specifico cliente (campo {@code codice_pagamento con valore {@code null} }).
-     * @param idcliente identificativo del cliente di classe {@code idcliente}
+     * @param idcliente identificativo del cliente di classe {@code ClienteEntity}
      * @return oggetto container {@code Optional} contenente {@code ComandaEntity} oppure {@code null}
      */
     Optional<ComandaEntity> getComandaAttiva(String idcliente);
 
-    //TODO
-    void insertTakeoutPhoneNum(ClienteEntity c);
-    //TODO
-    Iterable<ClienteEntity> getClienti();
-    //TODO
-    void deleteTakeoutPhoneNum(ClienteEntity c);
+    /**
+     * Ritorna tutti gli ordini associati ad una certa comanda
+     * @param idcomanda identificativo intero di una entità {@code ComandaEntity}
+     * @return Collezione {@code Iterable} di oggetti {@code OrdineEntity}
+     */
+    Iterable<OrdineEntity> getOrdersOfComanda(int idcomanda);
 }
