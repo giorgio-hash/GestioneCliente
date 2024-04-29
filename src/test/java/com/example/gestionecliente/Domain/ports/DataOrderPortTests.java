@@ -7,6 +7,7 @@ import com.example.gestionecliente.util.TestDataUtil;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.modelmapper.internal.util.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -88,5 +89,20 @@ public class DataOrderPortTests {
         assertThat(obtained.isPresent()).isTrue();
         assertThat(obtained.get().getId()).isEqualTo(res.getId());
         assertThat(obtained.get().getIdCliente()).isEqualTo(res.getIdCliente());
+    }
+
+    @Test
+    @Order(4)
+    public void testFetchAllOrdersOfComanda(){
+        ComandaEntity existingComanda = TestDataUtil.createComandaEntityC();
+        ComandaEntity insert = dataOrderPort.insertComanda(existingComanda);
+
+        for(int i=0;i<3;i++)
+            dataOrderPort.insertOrder(TestDataUtil.createOrdineEntityC());
+
+        Iterable<OrdineEntity> oe = dataOrderPort.getOrdersOfComanda(insert.getId());
+        assertThat(Iterables.getLength(oe)).isEqualTo(3);
+        for(OrdineEntity o : oe)
+            assertThat(o).isInstanceOf(OrdineEntity.class);
     }
 }
