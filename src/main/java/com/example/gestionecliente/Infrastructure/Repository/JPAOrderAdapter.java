@@ -62,7 +62,7 @@ public class JPAOrderAdapter implements DataOrderPort {
 
     @Override
     public Iterable<OrdineEntity> getOrdersOfComanda(int idcomanda) {
-        return orrep.getAllOrdersOfComanda(idcomanda);
+        return orrep.findAllByIdComanda(idcomanda);
     }
 
 }
