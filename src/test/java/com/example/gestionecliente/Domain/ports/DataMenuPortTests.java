@@ -1,16 +1,15 @@
 package com.example.gestionecliente.Domain.ports;
 
-import com.example.gestionecliente.Domain.Entity.IngredientePrincipaleEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
-import com.example.gestionecliente.Domain.Repository.IngredientePrincipaleRepository;
-import com.example.gestionecliente.Domain.Repository.PiattoRepository;
 import com.example.gestionecliente.util.TestDataUtil;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.internal.util.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -23,30 +22,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Sql({"/db/schema.sql","/db/data-test.sql"})
 public class DataMenuPortTests {
 
 
     private DataMenuPort dataMenuPort;
-    private PiattoRepository pR;
-    private IngredientePrincipaleRepository iPR;
+    //private PiattoRepository pR;
+    //private IngredientePrincipaleRepository iPR;
 
     @Autowired
-    public DataMenuPortTests(DataMenuPort dataMenuPort, PiattoRepository pR, IngredientePrincipaleRepository iPR) {
+    public DataMenuPortTests(DataMenuPort dataMenuPort) {
         this.dataMenuPort = dataMenuPort;
-        this.pR = pR;
-        this.iPR = iPR;
     }
 
     @Test
+    @Order(1)
     public void testFindPiattoByID() {
-
-        iPR.save(TestDataUtil.createCarota());
-        pR.save(TestDataUtil.createPiattoEntityA());
 
         PiattoEntity expected = TestDataUtil.createPiattoEntityA();
         Optional<PiattoEntity> obtained = dataMenuPort.getPiatto("ZUDICA");
 
-        assertThat(obtained.isEmpty()).isFalse();
+
         assertThat(obtained.get().getId()).isEqualTo(expected.getId());
         assertThat(obtained.get().getIdIngrPrinc()).isEqualTo(expected.getIdIngrPrinc());
         assertThat(obtained.get().getPrezzo()).isEqualTo(expected.getPrezzo());
@@ -56,14 +52,11 @@ public class DataMenuPortTests {
 
 
     @Test
+    @Order(2)
     public void testFindAllPiatto(){
-
-        iPR.save(TestDataUtil.createCarota());
 
         PiattoEntity existingA = TestDataUtil.createPiattoEntityA();
         PiattoEntity existingB = TestDataUtil.createPiattoEntityB();
-        pR.save(existingA);
-        pR.save(existingB);
 
         Iterable<PiattoEntity> obtained = dataMenuPort.getMenu();
 
@@ -71,7 +64,7 @@ public class DataMenuPortTests {
         assertThat(Iterables.getLength(obtained)).isEqualTo(2);
 
         for(PiattoEntity p : obtained){
-            if(p.getId().equals("CAJULI"))
+            if(p.getId().equals("ZUCCVE"))
                 assertThat(p).isEqualTo(existingB);
             if(p.getId().equals("ZUDICA"))
                 assertThat(p).isEqualTo(existingA);

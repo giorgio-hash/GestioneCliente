@@ -1,19 +1,12 @@
 package com.example.gestionecliente.util;
 
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
-import com.example.gestionecliente.Domain.Entity.IngredientePrincipaleEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
 import com.example.gestionecliente.Domain.dto.NotificaOrdineDTO;
 
 public class TestDataUtil {
 
-    public static IngredientePrincipaleEntity createCarota(){
-        return IngredientePrincipaleEntity.builder()
-                .id("CAARA")
-                .nome("carota arancione")
-                .build();
-    }
     public static PiattoEntity createPiattoEntityA(){
         return PiattoEntity.builder()
                 .id("ZUDICA")
@@ -25,17 +18,16 @@ public class TestDataUtil {
     }
     public static PiattoEntity createPiattoEntityB(){
         return PiattoEntity.builder()
-                .id("CAJULI")
-                .idIngrPrinc("CAARA")
-                .descrizione("carote alla Julienne")
+                .id("ZUCCLES")
+                .idIngrPrinc("ZUCCVE")
+                .descrizione("Zucchine lesse")
                 .prezzo(10)
-                .tPreparazione(300)
+                .tPreparazione(400)
                 .build();
     }
 
     public static OrdineEntity createOrdineEntityB(){
         return OrdineEntity.builder()
-                .id(16)
                 .idComanda(1)
                 .idPiatto("SPA279")
                 .stato(1)
@@ -45,7 +37,6 @@ public class TestDataUtil {
 
     public static NotificaOrdineDTO createOrdineDtoB(){
         return NotificaOrdineDTO.builder()
-                .id(16)
                 .idComanda(1)
                 .build();
     }
@@ -59,14 +50,12 @@ public class TestDataUtil {
 
     public static ComandaEntity createComandaEntityC(){
         return ComandaEntity.builder()
-                .id(1)
                 .idCliente("tavolo1")
                 .build();
     }
 
     public static ComandaEntity createComandaEntityD(){
         return ComandaEntity.builder()
-                .id(2)
                 .idCliente("tavolo1")
                 .build();
     }
