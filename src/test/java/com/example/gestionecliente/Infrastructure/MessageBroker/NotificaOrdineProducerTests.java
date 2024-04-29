@@ -6,21 +6,15 @@ import com.example.gestionecliente.util.TestAppender;
 import com.example.gestionecliente.util.TestDataUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import config.EmbeddedKafkaConfig;
-import kafka.controller.KafkaController;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -28,7 +22,6 @@ import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
 
@@ -47,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * utilizzando un consumer creato con embedded kafka
  */
 @EnableKafka
-@EnableAutoConfiguration
-@SpringBootTest(classes = {EmbeddedKafkaConfig.class, PubOrderProducer.class})
+@SpringBootTest()
 @DirtiesContext
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @EmbeddedKafka(partitions = 1,

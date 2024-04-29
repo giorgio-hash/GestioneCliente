@@ -4,6 +4,7 @@ import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Repository.ComandaRepository;
 import com.example.gestionecliente.util.TestDataUtil;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Sql({"/db/schema.sql","/db/data-test.sql"})
 public class DataOrderPortTests {
 
     private final DataOrderPort dataOrderPort;
@@ -34,12 +36,13 @@ public class DataOrderPortTests {
     }
 
     @Test
+    @Order(1)
     public void testInsertNewComandaForCliente(){
 
         ComandaEntity insert = TestDataUtil.createComandaEntityC();
 
         ComandaEntity res = dataOrderPort.insertComanda(insert);
-        Optional<ComandaEntity> obtained = dataOrderPort.getComandaAttiva(res.getIdCliente());
+        Optional<ComandaEntity> obtained = dataOrderPort.getComandaAttiva("tavolo1");
 
         assertThat(obtained.isPresent()).isTrue();
 
@@ -53,6 +56,7 @@ public class DataOrderPortTests {
     }
 
     @Test
+    @Order(2)
     public void testInsertOrderAndFindById(){
 
         ComandaEntity existingComanda = TestDataUtil.createComandaEntityC();
@@ -60,7 +64,7 @@ public class DataOrderPortTests {
         OrdineEntity insertOrdine = TestDataUtil.createOrdineEntityC();
 
         OrdineEntity res = dataOrderPort.insertOrder(insertOrdine);
-        Optional<OrdineEntity> obtained = dataOrderPort.getOrder(res.getId());
+        Optional<OrdineEntity> obtained = dataOrderPort.getOrder(1);
 
         assertThat(obtained.isPresent()).isTrue();
         assertThat(obtained.get().getId()).isEqualTo(res.getId());
@@ -69,6 +73,7 @@ public class DataOrderPortTests {
 
 
     @Test
+    @Order(3)
     public void testInsertNewComandaAttiva(){
 
         ComandaEntity existingComanda = TestDataUtil.createComandaEntityC();

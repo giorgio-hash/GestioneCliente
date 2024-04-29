@@ -8,11 +8,10 @@ CREATE table if not exists Cliente(
 
 
 CREATE TABLE if not exists Comanda (
-                                       ID int(10),
+                                       ID int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                        ID_cliente varchar(10) NOT NULL,
                                        codice_pagamento varchar(255) DEFAULT NULL,
                                        totale_scontrino float DEFAULT 0.0,
-                                       PRIMARY KEY (ID),
                                        FOREIGN KEY (ID_cliente) REFERENCES Cliente(ID)
 );
 
@@ -33,7 +32,7 @@ CREATE TABLE if not exists Piatto(
 );
 
 CREATE TABLE IF NOT EXISTS Ordine(
-                                     ID int(10) NOT NULL PRIMARY KEY,
+                                     ID int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                      ID_comanda int(10) NOT NULL,
                                      ID_piatto varchar(20) NOT NULL,
                                      stato int(1) DEFAULT 0, -- 0=in preparazione, 1=completato
