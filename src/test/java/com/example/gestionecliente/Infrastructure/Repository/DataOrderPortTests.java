@@ -1,8 +1,9 @@
-package com.example.gestionecliente.Domain.ports;
+package com.example.gestionecliente.Infrastructure.Repository;
 
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Repository.ComandaRepository;
+import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import com.example.gestionecliente.util.TestDataUtil;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
