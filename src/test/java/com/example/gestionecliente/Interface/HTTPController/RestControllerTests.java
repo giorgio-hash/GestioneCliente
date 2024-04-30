@@ -1,6 +1,7 @@
 package com.example.gestionecliente.Interface.HTTPController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +39,7 @@ public class RestControllerTests {
 
 
     @Test
+    @Order(1)
     public void testThatGetMenuGives200WhenNotEmpty() throws Exception {
 
         mockMvc.perform(
@@ -50,6 +52,7 @@ public class RestControllerTests {
 
 
     @Test
+    @Order(2)
     public void testThatGetPiattoGives200WhenNotEmpty() throws Exception {
 
         String idpiatto = "ZUDICA";
@@ -61,6 +64,7 @@ public class RestControllerTests {
     }
 
     @Test
+    @Order(3)
     public void testThatCreatingANewComandaWhenNoComandaExistsGives200() throws Exception {
 
         String idcliente = "tavolo1";
@@ -72,6 +76,7 @@ public class RestControllerTests {
     }
 
     @Test
+    @Order(4)
     public void testThatCreatingANewComandaWhenComandaExistsGives403() throws Exception {
 
         String idcliente = "tavolo1";
@@ -89,6 +94,7 @@ public class RestControllerTests {
     }
 
     @Test
+    @Order(5)
     public void testThatRetrievingActiveComandaWhenExistsGives200() throws Exception {
 
         String idcliente = "tavolo1";
@@ -106,6 +112,7 @@ public class RestControllerTests {
     }
 
     @Test
+    @Order(6)
     public void testPopulateActiveComandaAndRetrievingOrdersReturns200() throws Exception {
 
         String idcliente = "tavolo1";
