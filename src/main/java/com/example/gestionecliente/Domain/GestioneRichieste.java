@@ -87,4 +87,9 @@ public class GestioneRichieste implements FrontSignalPort {
         return gestioneOrdini.getOrderStatus(id);
     }
 
+    @Override
+    public Optional<Iterable<OrdineEntity>> getOrdersOfCliente(String idcliente) {
+        return gestioneOrdini.getOrdersOfCliente(idcliente);
+    }
+
 }

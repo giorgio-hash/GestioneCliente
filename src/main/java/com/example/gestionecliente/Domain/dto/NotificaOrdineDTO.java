@@ -1,9 +1,6 @@
 package com.example.gestionecliente.Domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Data Transfer Object che notifica un aggiornamento della base dati Ordine
@@ -11,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Builder
 public class NotificaOrdineDTO {
 
