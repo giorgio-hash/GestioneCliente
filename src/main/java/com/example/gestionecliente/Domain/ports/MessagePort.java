@@ -1,6 +1,5 @@
 package com.example.gestionecliente.Domain.ports;
 
-import com.example.gestionecliente.Domain.dto.NotificaOrdineDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface MessagePort<T> {
