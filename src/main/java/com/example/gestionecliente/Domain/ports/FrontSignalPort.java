@@ -3,6 +3,9 @@ package com.example.gestionecliente.Domain.ports;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
+import com.example.gestionecliente.Domain.dto.ComandaDTO;
+import com.example.gestionecliente.Domain.dto.OrdineDTO;
+import com.example.gestionecliente.Domain.dto.PiattoDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.Optional;
@@ -16,48 +19,49 @@ public interface FrontSignalPort {
 
     /**
      * Richiesta per ottenere tutti gli oggetti dalla base dati Piatto.
-     * @return collezione <i>Iterable<i/> di <i>PiattoEntity<i/>
+     * @return collezione <i>Iterable<i/> di <i>PiattoDTO<i/>
      */
-    Iterable<PiattoEntity> getMenu();
+    Optional<Iterable<PiattoDTO>> getMenu();
 
     /**
      * Richiesta per ottenere una specifica tupla dalla base dati Piatto.
      * @param idpiatto identificativo del piatto di tipo <i>String<i/>
-     * @return un oggetto container di tipo Optional che potrebbe contenere <i>PiattoEntity<i/> oppure <i>null<i/>
+     * @return un oggetto container di tipo Optional che potrebbe contenere <i>PiattoDTO<i/> oppure <i>null<i/>
      */
-    Optional<PiattoEntity> getPiatto(String idpiatto);
+    Optional<PiattoDTO> getPiatto(String idpiatto);
 
     /**
      * Richiesta per ottenere l'assegnazione di una nuova comanda al cliente.
      * Richiede che la comanda precedente venga chiusa prima di crearne una nuova.
      *
      * @param idcliente identificativo cliente di tipo <i>String<i/>
-     * @return oggetto entità di tipo <i>ComandaEntity<i/>
+     * @return oggetto entità di tipo <i>ComandaDTO<i/>
      */
-    Optional<ComandaEntity> newComanda(String idcliente);
+    Optional<ComandaDTO> newComanda(String idcliente);
 
     /**
      * Richiesta per ottenenere la comanda attualmente attiva per uno specifico cliente.
      * @param idcliente identificativo di tipo <i>String<i/>
-     * @return container <i>Optional<i/> contenente un oggetto <i>ComandaEntity<i/> oppure <i>null<i/>
+     * @return container <i>Optional<i/> contenente un oggetto <i>ComandaDTO<i/> oppure <i>null<i/>
      */
-    Optional<ComandaEntity> getComandaAttiva(String idcliente);
+    Optional<ComandaDTO> getComandaAttiva(String idcliente);
 
     /**
      * Richiesta per ottenere l'inserimento di un nuovo ordine per la specifica comanda.
      * @param idcomanda identificativo comanda, tipo intero
      * @param nomepiatto identificativo piatto, tipo {@code String}
-     * @return oggetto inserito, di tipo {@code OrdineEntity}
+     * @param urgenzacliente intero che esprime l'urgenza del cliente
+     * @return oggetto inserito, di tipo {@code OrdineDTO}
      * @throws JsonProcessingException
      */
-    OrdineEntity newOrder(int idcomanda, String nomepiatto) throws JsonProcessingException;
+    Optional<OrdineDTO> newOrder(int idcomanda, String nomepiatto, int urgenzacliente) throws JsonProcessingException;
 
     /**
      * Richiesta per ottenere un ordine specifico.
      * @param id identificativo ordine di tipo intero
-     * @return container <i>Optional<i/> contenente un oggetto <i>OrdineEntity<i/> oppure <i>null<i/>
+     * @return container <i>Optional<i/> contenente un oggetto <i>OrdineDTO<i/> oppure <i>null<i/>
      */
-    Optional<OrdineEntity> getOrder(int id);
+    Optional<OrdineDTO> getOrder(int id);
 
     /**
      * Richiesta per ottenere lo stato di un ordine specifico.
@@ -71,7 +75,7 @@ public interface FrontSignalPort {
      * @param idcliente identificativo di entità {@code OrdineEntity}
      * @return una container {@code Optional} contenente {@code null} oppure una collezione {@code Iterable} di oggetti {@code OrdineEntity}
      */
-    Optional<Iterable<OrdineEntity>> getOrdersOfCliente(String idcliente);
+    Optional<Iterable<OrdineDTO>> getOrdersOfCliente(String idcliente);
 
 
 }

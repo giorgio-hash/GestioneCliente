@@ -2,6 +2,7 @@ package com.example.gestionecliente.Domain;
 
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
+import com.example.gestionecliente.Domain.dto.OrdineDTO;
 import com.example.gestionecliente.Domain.ports.DataOrderPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,14 +41,16 @@ public class GestioneOrdini implements OrderManagerIF {
     }
 
     @Override
-    public OrdineEntity addNewOrder(int idcomanda, String idpiatto) {
+    public OrdineEntity addNewOrder(int idcomanda, String idpiatto, int urgenzacliente) {
 
-        OrdineEntity o = new OrdineEntity();
-        o.setIdComanda(idcomanda);
-        o.setIdPiatto(idpiatto);
+        OrdineEntity ordineEntity = OrdineEntity.builder()
+                .idComanda(idcomanda)
+                .idPiatto(idpiatto)
+                .urgenzaCliente(urgenzacliente)
+                .stato(0)
+                .build();
 
-
-        return dataOrderPort.insertOrder(o);
+        return dataOrderPort.insertOrder(ordineEntity);
 
     }
 

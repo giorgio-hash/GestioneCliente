@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public interface APICliente {
 
     @PostMapping(path = "/order/add")
-    ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto) throws JsonProcessingException;
+    ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto, @RequestParam int urgenzacliente) throws JsonProcessingException;
 
     @GetMapping(path = "/order")
     ResponseEntity getOrder(@RequestParam int id);

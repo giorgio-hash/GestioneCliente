@@ -37,7 +37,7 @@ public interface OrderManagerIF {
      * @param idpiatto identificativo del piatto di tipo {@code String}
      * @return oggetto inserito, di classe {@code OrdineEntity}
      */
-    OrdineEntity addNewOrder(int idcomanda, String idpiatto);
+    OrdineEntity addNewOrder(int idcomanda, String idpiatto, int urgenzacliente);
 
     /**
      * Restituisce l'ordine specificato.
