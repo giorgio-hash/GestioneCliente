@@ -1,42 +1,34 @@
-package com.example.gestionecliente.Domain.Entity;
+package com.example.gestionecliente.Domain.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 /**
- * Entità Ordine, riguarda un'ordinazione effettuata da parte del Cliente
+ * DTO della classe OrdineEntity
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "Ordine", schema = "serveeasy", catalog = "")
-public class OrdineEntity {
+public class OrdineDTO {
 
     /**
      * Identificatore dell'ordine
      */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "ID", nullable = false, insertable = false, updatable = false)
     private int id;
 
     /**
      * Identificatore della comanda di cui l'ordine fa parte
      */
-    @Column(name = "ID_COMANDA", nullable = false, updatable = false)
     private int idComanda;
 
     /**
      * Identificatore del piatto ordinato dal cliente
      */
-    @Basic
-    @Column(name = "ID_piatto", nullable = false, length = 20)
     private String idPiatto;
 
     /**
@@ -46,17 +38,12 @@ public class OrdineEntity {
      * 2: Ordine in preparazione
      * 3: Ordine preparato
      */
-    @Basic
-    @Column(name = "stato", updatable = true)
     private Integer stato;
 
     /**
      * Istante temporale in cui viene effettuata l'ordinazione
      * pattern : "yyyy-MM-dd HH:mm:ss.SSS"
      */
-    @Basic
-    @CreationTimestamp
-    @Column(name = "t_ordinazione", updatable = false)
     private Timestamp tOrdinazione;
 
     /**
@@ -65,8 +52,6 @@ public class OrdineEntity {
      * 1 : espresso urgenza
      * 2 : default
      */
-    @Basic
-    @Column(name = "urgenza_cliente", updatable = true)
     private Integer urgenzaCliente;
 
 }

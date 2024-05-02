@@ -1,0 +1,31 @@
+package com.example.gestionecliente.Domain.mapper.impl;
+
+import com.example.gestionecliente.Domain.Entity.OrdineEntity;
+import com.example.gestionecliente.Domain.dto.OrdineDTO;
+import com.example.gestionecliente.Domain.mapper.Mapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
+
+/**
+ * Implementazione del Mapper tra Entita' a DTO e viceversa
+ */
+@Component
+public class OrdineMapper implements Mapper<OrdineEntity, OrdineDTO> {
+
+    private ModelMapper modelMapper;
+
+    public OrdineMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public OrdineDTO mapTo(OrdineEntity ordineEntity) {
+        return modelMapper.map(ordineEntity,OrdineDTO.class);
+    }
+
+    @Override
+    public OrdineEntity mapFrom(OrdineDTO ordineDTO) {
+        return modelMapper.map(ordineDTO, OrdineEntity.class);
+    }
+
+}

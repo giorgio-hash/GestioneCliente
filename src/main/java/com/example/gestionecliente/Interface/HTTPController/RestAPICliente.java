@@ -3,6 +3,9 @@ package com.example.gestionecliente.Interface.HTTPController;
 import com.example.gestionecliente.Domain.Entity.ComandaEntity;
 import com.example.gestionecliente.Domain.Entity.OrdineEntity;
 import com.example.gestionecliente.Domain.Entity.PiattoEntity;
+import com.example.gestionecliente.Domain.dto.ComandaDTO;
+import com.example.gestionecliente.Domain.dto.OrdineDTO;
+import com.example.gestionecliente.Domain.dto.PiattoDTO;
 import com.example.gestionecliente.Domain.ports.FrontSignalPort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,24 +34,24 @@ public class RestAPICliente implements APICliente {
     }
 
     @Override
-    public ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto) throws JsonProcessingException {
+    public ResponseEntity submitOrder(@RequestParam String idcliente, @RequestParam String idpiatto, @RequestParam int urgenzacliente) throws JsonProcessingException {
 
-        Optional<ComandaEntity> cres = frontSignalPort.getComandaAttiva(idcliente);
+        Optional<ComandaDTO> cres = frontSignalPort.getComandaAttiva(idcliente);
 
         if(cres.isEmpty())
             return new ResponseEntity<String>("il cliente non ha comande attive assegnate",HttpStatus.NOT_FOUND);
 
-        OrdineEntity res = frontSignalPort.newOrder(cres.get().getId(), idpiatto);
+        Optional<OrdineDTO> res = frontSignalPort.newOrder(cres.get().getId(), idpiatto, urgenzacliente);
 
-        if (res == null) return new ResponseEntity<String>("comanda o piatto non trovato",HttpStatus.NOT_FOUND);
+        if (res.isEmpty()) return new ResponseEntity<String>("comanda o piatto non trovato",HttpStatus.NOT_FOUND);
 
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(res.get());
     }
 
     @Override
     public ResponseEntity getOrder(@RequestParam int id) {
 
-        Optional<OrdineEntity> res = frontSignalPort.getOrder(id);
+        Optional<OrdineDTO> res = frontSignalPort.getOrder(id);
 
         if(res.isEmpty()) return new ResponseEntity<String>("ordine non trovato",HttpStatus.NOT_FOUND);
 
@@ -75,7 +78,7 @@ public class RestAPICliente implements APICliente {
     @Override
     public ResponseEntity getOrdersOfCliente(String idcliente) {
 
-        Optional<Iterable<OrdineEntity>> res = frontSignalPort.getOrdersOfCliente(idcliente);
+        Optional<Iterable<OrdineDTO>> res = frontSignalPort.getOrdersOfCliente(idcliente);
         if(res.isEmpty())
             return new ResponseEntity<String>("comanda cliente non trovata",HttpStatus.NOT_FOUND);
 
@@ -85,7 +88,7 @@ public class RestAPICliente implements APICliente {
     @Override
     public ResponseEntity getComandaAttiva(@PathVariable String idcliente) {
 
-        Optional<ComandaEntity> res = frontSignalPort.getComandaAttiva(idcliente);
+        Optional<ComandaDTO> res = frontSignalPort.getComandaAttiva(idcliente);
 
         if(res.isEmpty()) return ResponseEntity.notFound().build();
 
@@ -94,7 +97,7 @@ public class RestAPICliente implements APICliente {
 
     @Override
     public ResponseEntity newComanda(@PathVariable String idcliente) {
-        Optional<ComandaEntity> res = frontSignalPort.newComanda(idcliente);
+        Optional<ComandaDTO> res = frontSignalPort.newComanda(idcliente);
 
         if(res.isEmpty()) return new ResponseEntity<String>("cliente ha una comanda già attiva oppure cliente non esiste", HttpStatus.FORBIDDEN);
         return ResponseEntity.ok(res.get());
@@ -103,17 +106,17 @@ public class RestAPICliente implements APICliente {
     @Override
     public ResponseEntity getMenu() {
 
-        Iterable<PiattoEntity> res = frontSignalPort.getMenu();
+        Optional<Iterable<PiattoDTO>> res = frontSignalPort.getMenu();
 
-        if(Iterables.getLength(res) == 0) return ResponseEntity.notFound().build();
+        if(Iterables.getLength(res.get()) == 0) return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(res.get());
     }
 
     @Override
     public ResponseEntity getPiatto(String idpiatto) {
 
-        Optional<PiattoEntity> res = frontSignalPort.getPiatto(idpiatto);
+        Optional<PiattoDTO> res = frontSignalPort.getPiatto(idpiatto.toUpperCase());
 
         if(res.isPresent())
             return ResponseEntity.ok(res.get());

@@ -110,6 +110,7 @@ public class RestControllerTests {
 
         String idcliente = "tavolo1";
         String idpiatto = "ZUDICA";
+        int urgenzacliente = 0;
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/cliente/"+idcliente+"/comanda/new")
         ).andExpect(
@@ -121,6 +122,7 @@ public class RestControllerTests {
                     MockMvcRequestBuilders.post("/cliente/order/add")
                             .param("idcliente",idcliente)
                             .param("idpiatto",idpiatto)
+                            .param("urgenzacliente", String.valueOf(urgenzacliente))
             ).andExpect(
                     MockMvcResultMatchers.status().isOk()
             );
