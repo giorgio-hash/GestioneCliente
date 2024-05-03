@@ -1,18 +1,16 @@
-package com.example.gestionecliente.Domain.Entity;
+package com.example.gestionecliente.Domain.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * Oggetto ingrediente principale
+ * DTO della classe IngredientePrincipaleEntity
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "IngredientePrincipale", schema = "serveeasy", catalog = "")
-public class IngredientePrincipaleEntity {
+public class IngredientePrincipaleDTO {
 
     /**
      * Identificativo dell'ingrediente principale

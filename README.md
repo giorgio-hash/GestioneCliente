@@ -1,77 +1,89 @@
-## Command Line Producer
-Utilizzare il seguente comando per pubblicare sul topic specificato un messaggio
+# Gestione Cliente
+Il microservizio Gestione Cliente si occupa di implementare i seguenti casi d'uso del gruppo cliente:
+
+UC-2 “effettuare un’ordinazione”, dettagliato:
+- UC-2.1 : effettuare un ordine personalizzato, il cliente può effettuare un ordine escludendo un ingrediente o 
+descrivendo una variazione del piatto
+
+UC-3 “Visualizzare menu”, dettagliato:
+- UC-3.1 : visualizzare piatto
+- UC-3.2 : visualizzare informazioni piatto, il cliente deve poter leggere breve descrizione, ingredienti, prezzo
+
+UC-4 “Autenticazione”, dettagliato:
+- UC-4.1 : identificazione sessione cliente, al momento del pasto e solo per il pasto, il cliente deve poter distinguere la propria comanda
+
+Nello specifico quindi GestioneCliente risolve gli use case del gruppo “cliente”, espone le funzionalità destinate ai 
+dispositivi di tavolo ed al portale web per clienti d’asporto. Ha dunque il compito di gestire gli aspetti del servizio
+legati alle interazioni del cliente col sistema, come la visualizzazione del menu, la creazione degli ordini ed il 
+raggruppamento degli ordini in una comanda relativa.
+
+La comunicazione con gli altri microservizi avviene tramite Message Broker come segue:
+- Il microservizio [GestioneCliente](https://github.com/giorgio-hash/GestioneCliente) comunica verso [GestioneComanda](https://github.com/giorgio-hash/GestioneComanda) tramite il topic Kafka NotifyOrderEvent.
+
+La comunicazione con il databse avviene tramite un adapter JPA
+
+Il microservizio è stato implementato seguendo lo stile architetturale esagonale, seguendo lo schema port/adapter,
+per questo motivo viene strutturato in 3 parti:
+
+- ### Interface
+  Adattatori ponte tra il mondo esterno e il core del sistema, consentono al microservizio di comunicare con altre applicazioni, servizi o dispositivi esterni in modo         indipendente dall'implementazione interna del sistema stesso. Sono presenti i seguenti Interface Adapter:
+    - HTTPControllers: RestApiCliente, permette di esporre API verso l'esterno.
+  
+- ### Domain
+  Definisce gli oggetti, le entità e le operazioni che sono pertinenti al problema che il microservizio gestisce.
+
+- ### Infrastructure:
+  Adattatori ponte tra il core del sistema e l'infrastruttura esterna, gestendo le chiamate e le operazioni necessarie per accedere e utilizzare le risorse infrastrutturali.     Sono presenti i seguenti Infrastructure Adapters:
+    - Repository: JPAOrderAdapter e JPAMenuAdapter per la comunicazione con il database;
+    - MessageBroker: PubOrderEvent per l'invio di messaggi sul topic verso il microservizio della cucina.
+
+## Start
+Apri Docker Desktop, apri un terminale e vai alla root directory del progetto e digita:
 ```shell
-docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic "sendOrderEvent"
+docker compose up
 ```
+Manda in run il microservizio usando qualsiasi IDE oppure tramite Maven Wrapper con la seguente istruzione:
 ```shell
-docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic "notifyPrepEvent"
-```
-```shell
-docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic "notifyOrderEvent"
+./mvnw clean install
+./mvnw spring-boot:run
 ```
 
-## Command Line Consumer
-Utilizzare il seguente comando per restare in ascolto sul topic specifico
-```shell
-docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic "sendOrderEvent" --from-beginning
-```
-```shell
-docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic "notifyPrepEvent" --from-beginning
-```
-```shell
-docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic "notifyOrderEvent" --from-beginning
-```
+## User Interface
 
-## Kafka Web UI
+### Kafdrop
 [Kafdrop](https://github.com/obsidiandynamics/kafdrop) è un'interfaccia utente Web per visualizzare i topic di Kafka
 e sfogliare i gruppi dei consumers.
 Lo strumento visualizza informazioni circa: brokers, topics, partitions, consumers, e consente di visualizzare i messaggi.
 
 Apri un browser e vai all'indirizzo http://localhost:9000.
 
+### phpMyAdmin
+[phpMyAdmin](https://www.phpmyadmin.net/) è un'applicazione web che consente di amministrare un database MariaDB tramite un qualsiasi browser.
+
+Apri un browser e vai all'indirizzo http://localhost:3307.
+
+## API
+Il microservizio GestioneCucina espone 3 API verso l'esterno per mezzo dell'adattarore RestApiCucina in HTTPControllers,
+per la documentazione si rimanda alla documentazione completa via documenter.getpostman: https://documenter.getpostman.com/view/32004409/2sA3JFBQDv
+
 ## Test
-è possibile usufruire di varie API di test per iniettare dell'esterno messaggi verso
-il topic del broker o per fare il percorso opposto e leggere gli ultimi messaggi del topic.
+E' possibile usufruire delle API per verificare il corretto funzionamento del sistema
 via [Postman](https://web.postman.co//) tramite l'API all'indirizzo http://localhost:8080/...
-### topic sendOrderEvent
-```http request
-POST /test/sendorderevent HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Content-Length: 41
 
-{
-    "id" : 19,
-    "idComanda" : 6
-}
-``` 
-```http request
-GET /test/sendorderevent HTTP/1.1
-Host: localhost:8080
-``` 
-### topic notifyOrderEvent
-```http request
-POST /test/notifyorderevent HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Content-Length: 30
+### Test dei topic Kafka:
+- ### Command Line Producer
+    Utilizzare il seguente comando per pubblicare sul topic specificato un messaggio
+    ```shell
+    docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic "notifyOrderEvent"
+    ```
 
-"messaggio inviato da postman"
-``` 
-```http request
-GET /test/notifyorderevent HTTP/1.1
-Host: localhost:8080
-``` 
-### topic notifypPepEvent
-```http request
-POST /test/notifyprepevent HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Content-Length: 30
-
-"messaggio inviato da postman"
-``` 
-```http request
-GET /test/notifyprepevent HTTP/1.1
-Host: localhost:8080
-``` 
+- ### Command Line Consumer
+    Utilizzare il seguente comando per restare in ascolto sul topic specifico
+    ```shell
+    docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic "notifyOrderEvent" --from-beginning
+    ```
+### Test di integrazione e unità
+E' possibile eseguire i test di integrazione e di unità tramite il Maven Wrapper, che è uno strumento che consente di eseguire i comandi Maven senza dover avere Maven installato globalmente sul sistema, tramite l'istruzione:
+```shell
+ ./mvnw clean verify
+ ```

@@ -1,24 +1,23 @@
-package com.example.gestionecliente.Domain.Entity;
+package com.example.gestionecliente.Domain.dto;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * Oggetto Entity per la base dati Cliente
+ * Oggetto DTO per la classe ClienteEntity
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "Cliente", schema = "serveeasy", catalog = "")
-public class ClienteEntity {
+public class ClienteDTO {
 
     /**
      * Identificativo del Cliente
      */
-    @Id
-    @Column(name = "ID", nullable = false, length = 10)
     private String id;
 
     /**
@@ -26,8 +25,6 @@ public class ClienteEntity {
      * 0: il cliente è d'asporto,
      * 1: il cliente è da tavolo
      */
-    @Basic
-    @Column(name = "t_o_a", nullable = false)
     private byte tOA;
 
 }
