@@ -87,7 +87,6 @@ E' possibile eseguire i test di integrazione e di unità tramite il Maven Wrappe
 ```shell
  ./mvnw clean verify
  ```
-
 ## Analisi Statica
 ### Checkstyle
 In questo progetto è integrato un tool per l'analisi statica: 
