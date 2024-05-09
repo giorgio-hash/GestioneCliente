@@ -1,4 +1,6 @@
 # Gestione Cliente
+Componente del sistema [ServeEasy](https://github.com/giorgio-hash/ServeEasy.git).
+
 Il microservizio Gestione Cliente si occupa di implementare i seguenti casi d'uso del gruppo cliente:
 
 UC-2 “effettuare un’ordinazione”, dettagliato:
