@@ -4,3 +4,8 @@ spring:
     producer:
       topic: notifyOrderEvent
       group-id: cliente
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #"forza" ad adottare i nomi di @Table
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
