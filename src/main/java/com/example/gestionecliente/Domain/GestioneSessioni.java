@@ -43,13 +43,4 @@ public class GestioneSessioni implements SessioneIF{
 
     }
 
-    @Override
-    public void addCliente(String idcliente) {
-
-    }
-
-    @Override
-    public void deleteCliente(String idcliente) {
-
-    }
 }

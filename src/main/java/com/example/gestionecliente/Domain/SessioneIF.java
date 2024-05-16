@@ -48,14 +48,4 @@ public interface SessioneIF {
      */
     void deleteComanda(int idcliente);
 
-    /**
-     * Aggiunge cliente alla matrice
-     * @param idcliente identificativo del cliente
-     */
-    void addCliente(String idcliente);
-
-    /**Rimuove cliente dalla matrice
-     * @param idcliente identificativo del cliente
-     */
-    void deleteCliente(String idcliente);
 }
