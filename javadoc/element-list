@@ -1,0 +1,15 @@
+com.example.gestionecliente
+com.example.gestionecliente.config
+com.example.gestionecliente.Domain
+com.example.gestionecliente.Domain.dto
+com.example.gestionecliente.Domain.Entity
+com.example.gestionecliente.Domain.mapper
+com.example.gestionecliente.Domain.mapper.impl
+com.example.gestionecliente.Domain.mappers
+com.example.gestionecliente.Domain.ports
+com.example.gestionecliente.Domain.Repository
+com.example.gestionecliente.Infrastructure.MessageBroker
+com.example.gestionecliente.Infrastructure.Repository
+com.example.gestionecliente.Interface.HTTPController
+com.example.gestionecliente.util
+config
